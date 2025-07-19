@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMVARDHAN - Environmental Transformation Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Color Scheme */
+        :root {
+            --primary-green: #2d5016;
+            --accent-green: #4a7c59;
+            --bright-green: #7fb069;
+            --earth-brown: #8b4513;
+            --warm-orange: #ff8c42;
+            --sky-blue: #4fc3f7;
+            --golden: #ffd700;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
+            --gradient: linear-gradient(135deg, #2d5016, #4a7c59, #7fb069);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(45, 80, 22, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(45, 80, 22, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--golden);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--bright-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--golden);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--golden);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tree" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23tree)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease-out 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: slideInLeft 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--golden);
+            color: var(--primary-green);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--warm-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .impact-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .impact-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            color: var(--white);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .impact-card i {
+            font-size: 2rem;
+            color: var(--golden);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .impact-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--golden);
+        }
+
+        .impact-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Program Hubs Section */
+        .program-hubs {
+            padding: 5rem 0;
+            background: var(--light-bg);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--golden);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--accent-green);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hubs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .hub-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hub-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hub-card:hover::before {
+            left: 100%;
+        }
+
+        .hub-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--golden);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .hub-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hub-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hub-card p {
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hub-card .btn {
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--golden);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--golden);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--golden);
+            color: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hubs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid var(--golden);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-leaf"></i>
+                SAMVARDHAN
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#hubs">Programs</a></li>
+                <li><a href="#stories">Stories</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>SAMVARDHAN</h1>
+                <p>Transforming Mining Communities Through Environmental Action. Join the regenerative movement that's healing our earth, one village at a time.</p>
+                <div class="cta-buttons">
+                    <a href="#hubs" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Start Your Journey
+                    </a>
+                    <a href="#stories" class="btn btn-secondary">
+                        <i class="fas fa-play"></i>
+                        Watch Stories
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="impact-cards">
+                    <div class="impact-card">
+                        <i class="fas fa-users"></i>
+                        <h3>90+</h3>
+                        <p>Community Groups</p>
+                    </div>
+                    <div class="impact-card">
+                        <i class="fas fa-seedling"></i>
+                        <h3>25K+</h3>
+                        <p>Eco Actions Logged</p>
+                    </div>
+                    <div class="impact-card">
+                        <i class="fas fa-recycle"></i>
+                        <h3>1500+</h3>
+                        <p>Stories Shared</p>
+                    </div>
+                    <div class="impact-card">
+                        <i class="fas fa-tree"></i>
+                        <h3>100%</h3>
+                        <p>Community Driven</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Hubs Section -->
+    <section class="program-hubs" id="hubs">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Our Program Hubs</h2>
+                <p>Seven interconnected pathways to environmental transformation, designed for mining communities by mining communities.</p>
+            </div>
+            <div class="hubs-grid">
+                <div class="hub-card fade-in">
+                    <div class="hub-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3>Material Mindfulness</h3>
+                    <p>Zero waste living, resource recovery guides, and community upcycling initiatives that turn waste into wealth.</p>
+                    <a href="#" class="btn btn-primary">Explore Hub</a>
+                </div>
+                <div class="hub-card fade-in">
+                    <div class="hub-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Watershed Guardianship</h3>
+                    <p>Rainwater harvesting, water body restoration, and community-led water conservation projects.</p>
+                    <a href="#" class="btn btn-primary">Explore Hub</a>
+                </div>
+                <div class="hub-card fade-in">
+                    <div class="hub-icon">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <h3>Plastic Detox Protocols</h3>
+                    <p>Comprehensive guides for plastic-free campaigns and SHG-driven plastic upcycling models.</p>
+                    <a href="#" class="btn btn-primary">Explore Hub</a>
+                </div>
+                <div class="hub-card fade-in">
+                    <div class="hub-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3>Urban Harmony Hubs</h3>
+                    <p>Swachhta initiatives and green corridor projects for schools, markets, and mining colonies.</p>
+                    <a href="#" class="btn btn-primary">Explore Hub</a>
+                </div>
+                <div class="hub-card fade-in">
+                    <div class="hub-icon">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <h3>Rain & Reuse Lab</h3>
+                    <p>DIY water reuse systems, greywater management, and innovative rain gauge installations.</p>
+                    <a href="#" class="btn btn-primary">Explore Hub</a>
+                </div>
+                <div class="hub-card fade-in">
+                    <div class="hub-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Resource-to-Revenue Studio</h3>
+                    <p>SHG microenterprise models for sustainable income generation through eco-friendly practices.</p>
+                    <a href="#" class="btn btn-primary">Explore Hub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#about">About SAMVARDHAN</a></p>
+                    <p><a href="#hubs">Program Hubs</a></p>
+                    <p><a href="#stories">Success Stories</a></p>
+                    <p><a href="#impact">Impact Dashboard</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Get Involved</h3>
+                    <p><a href="#register">Register Your Group</a></p>
+                    <p><a href="#volunteer">Become a Volunteer</a></p>
+                    <p><a href="#ambassador">EcoAmbassador Program</a></p>
+                    <p><a href="#partnerships">Partnerships</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@samvardhan.org</p>
+                    <p><i class="fas fa-phone"></i> +91-XXX-XXX-XXXX</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Bokaro, Jharkhand</p>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 SAMVARDHAN. Empowering communities, regenerating earth.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation for impact cards
+        function animateCounter(element, target, duration) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    start = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(start) + (element.textContent.includes('+') ? '+' : '') + (element.textContent.includes('%') ? '%' : '');
+            }, 16);
+        }
+
+        // Animate counters when hero section is visible
+        const heroObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.impact-card h3');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.textContent);
+                        if (!isNaN(target)) {
+                            animateCounter(counter, target, 2000);
+                        }
+                    });
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const heroSection = document.querySelector('.hero-visual');
+        if (heroSection) {
+            heroObserver.observe(heroSection);
+        }
+    </script>
+</body>
+</html>
