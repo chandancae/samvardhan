@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About SAMVARDHAN - Environmental Transformation Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Color Scheme */
+        :root {
+            --primary-green: #2d5016;
+            --accent-green: #4a7c59;
+            --bright-green: #7fb069;
+            --earth-brown: #8b4513;
+            --warm-orange: #ff8c42;
+            --sky-blue: #4fc3f7;
+            --golden: #ffd700;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
+            --gradient: linear-gradient(135deg, #2d5016, #4a7c59, #7fb069);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(45, 80, 22, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(45, 80, 22, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--golden);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--bright-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--golden);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--golden);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Header Section */
+        .page-header {
+            background: var(--gradient);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" patternUnits="userSpaceOnUse" width="15" height="15"><circle cx="7.5" cy="7.5" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .page-header h1 {
+            font-size: 4rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Main Content Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section:nth-child(even) {
+            background: var(--light-bg);
+        }
+
+        /* Mission Section */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .mission-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .mission-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--golden);
+            border-radius: 2px;
+        }
+
+        .mission-content p {
+            font-size: 1.1rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .mission-visual {
+            position: relative;
+        }
+
+        .philosophy-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .philosophy-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .philosophy-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--golden);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .philosophy-card i {
+            font-size: 2.5rem;
+            color: var(--bright-green);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .philosophy-card h4 {
+            font-size: 1.2rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .philosophy-card p {
+            font-size: 0.9rem;
+            color: var(--accent-green);
+        }
+
+        /* Story Timeline */
+        .story-section {
+            background: var(--primary-green);
+            color: var(--white);
+            position: relative;
+        }
+
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="leaves" patternUnits="userSpaceOnUse" width="25" height="25"><path d="M12.5,5 Q20,12.5 12.5,20 Q5,12.5 12.5,5 Z" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23leaves)"/></svg>');
+        }
+
+        .story-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .story-section h2 {
+            font-size: 2.5rem;
+            color: var(--golden);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--golden);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 2.5rem;
+            width: 20px;
+            height: 20px;
+            background: var(--golden);
+            border-radius: 50%;
+            border: 4px solid var(--primary-green);
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -14px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -14px;
+        }
+
+        .timeline-content {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .timeline-content h3 {
+            color: var(--golden);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .date {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content p {
+            line-height: 1.6;
+        }
+
+        /* Principles Section */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .principle-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(127,176,105,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .principle-card:hover::before {
+            left: 100%;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .principle-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .principle-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .principle-card p {
+            color: var(--accent-green);
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Team Section */
+        .team-section {
+            text-align: center;
+        }
+
+        .section-title {
+            margin-bottom: 2rem;
+        }
+
+        .team-section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .team-section .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-green);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .partner-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .partner-card i {
+            font-size: 2rem;
+            color: var(--bright-green);
+            margin-bottom: 1rem;
+        }
+
+        .partner-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .partner-card p {
+            color: var(--accent-green);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient);
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1.5" fill="rgba(255,215,0,0.3)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--golden);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--golden);
+            color: var(--primary-green);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--warm-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--golden);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--golden);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--golden);
+            color: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 3px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left;
+                padding-left: 4rem;
+            }
+
+            .timeline-item::before {
+                left: 16px !important;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .philosophy-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-leaf"></i>
+                SAMVARDHAN
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="stories.html">Stories</a></li>
+                <li><a href="impact.html">Impact</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="section-container">
+            <h1>About SAMVARDHAN</h1>
+            <p>Empowering mining communities to lead environmental transformation through regenerative action, ancient wisdom, and modern digital engagement.</p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="mission-grid">
+                <div class="mission-content fade-in">
+                    <h2>Our Mission</h2>
+                    <p>SAMVARDHAN is more than a platform—it's a movement. Born from the understanding that mining communities possess profound wisdom about living in harmony with the earth, we create digital bridges between traditional knowledge and modern environmental solutions.</p>
+                    
+                    <p>We believe that true environmental transformation happens when communities are empowered to lead their own regenerative journey. Through our comprehensive hub-based approach, we provide tools, resources, and networks that enable schools, self-help groups, panchayats, and colleges in mining regions to become catalysts of positive change.</p>
+                    
+                    <p>Our mission extends beyond individual actions to systemic transformation—creating a web of interconnected communities that share knowledge, celebrate successes, and collectively heal the earth while building sustainable livelihoods.</p>
+                </div>
+                
+                <div class="mission-visual fade-in">
+                    <div class="philosophy-cards">
+                        <div class="philosophy-card">
+                            <i class="fas fa-seedling"></i>
+                            <h4>Dharma</h4>
+                            <p>Righteous duty toward earth's wellbeing</p>
+                        </div>
+                        <div class="philosophy-card">
+                            <i class="fas fa-hands-helping"></i>
+                            <h4>Karma</h4>
+                            <p>Purposeful action for regeneration</p>
+                        </div>
+                        <div class="philosophy-card">
+                            <i class="fas fa-recycle"></i>
+                            <h4>Regeneration</h4>
+                            <p>Healing and renewal of ecosystems</p>
+                        </div>
+                        <div class="philosophy-card">
+                            <i class="fas fa-users"></i>
+                            <h4>Community</h4>
+                            <p>Collective wisdom and shared responsibility</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Timeline -->
+    <section class="story-section section">
+        <div class="section-container">
+            <div class="story-content">
+                <h2>The SAMVARDHAN Story</h2>
+                <div class="timeline">
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <h3>Vision Ignited</h3>
+                            <div class="date">Early 2025</div>
+                            <p>Recognizing the untapped potential of mining communities to lead environmental transformation, the SAMVARDHAN vision emerged—creating a digital ecosystem that honors traditional wisdom while embracing modern solutions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <h3>Community Consultation</h3>
+                            <div class="date">March 2025</div>
+                            <p>Extensive consultations with schools, SHGs, panchayats, and colleges across Jharkhand's mining belt revealed the need for localized, culturally-sensitive environmental action frameworks.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <h3>Platform Development</h3>
+                            <div class="date">April - June 2025</div>
+                            <p>Co-creating digital tools with community input, developing multilingual resources, and building the seven interconnected program hubs that address real, locally-identified environmental challenges.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <h3>Pilot Launch</h3>
+                            <div class="date">July 2025</div>
+                            <p>Launching with 90+ pilot groups across mining communities, beginning the journey of documented, celebrated, and scaled environmental transformation led by those who know the land best.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-content">
+                            <h3>Network Expansion</h3>
+                            <div class="date">August 2025 - Present</div>
+                            <p>Growing our network to over 150 participating groups, expanding to multiple states, and witnessing the first major environmental victories driven entirely by community leadership and collaboration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guiding Principles -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-title">
+                <h2 style="text-align: center; font-size: 2.5rem; color: var(--primary-green); margin-bottom: 1rem;">Our Guiding Principles</h2>
+                <p style="text-align: center; font-size: 1.2rem; color: var(--accent-green); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">These foundational values shape every aspect of our work and platform design</p>
+            </div>
+            
+            <div class="principles-grid">
+                <div class="principle-card fade-in">
+                    <div class="principle-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Community-Centered</h3>
+                    <p>Every solution emerges from community needs and wisdom. We facilitate rather than dictate, ensuring that local voices lead every transformation initiative.</p>
+                </div>
+                
+                <div class="principle-card fade-in">
+                    <div class="principle-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Holistically Regenerative</h3>
+                    <p>Beyond sustainability, we focus on regeneration—healing damaged ecosystems while creating thriving communities and sustainable livelihoods.</p>
+                </div>
+                
+                <div class="principle-card fade-in">
+                    <div class="principle-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Radically Transparent</h3>
+                    <p>Open-source philosophy, public impact dashboards, and community-driven governance ensure accountability and trust in every initiative.</p>
+                </div>
+                
+                <div class="principle-card fade-in">
+                    <div class="principle-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation Through Tradition</h3>
+                    <p>Blending ancient ecological wisdom with cutting-edge digital tools to create solutions that honor heritage while embracing progress.</p>
+                </div>
+                
+                <div class="principle-card fade-in">
+                    <div class="principle-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Interconnected Action</h3>
+                    <p>Recognizing that environmental challenges require systemic solutions through connected networks of empowered communities.</p>
+                </div>
+                
+                <div class="principle-card fade-in">
+                    <div class="principle-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Excellence in Simplicity</h3>
+                    <p>Making complex environmental solutions accessible through intuitive design, clear communication, and culturally-relevant resources.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners & Support -->
+    <section class="team-section section">
+        <div class="section-container">
+            <h2>Our Ecosystem</h2>
+            <p class="subtitle">SAMVARDHAN thrives through collaborative partnerships with organizations that share our vision of community-led environmental transformation</p>
+            
+            <div class="partners-grid">
+                <div class="partner-card fade-in">
+                    <i class="fas fa-school"></i>
