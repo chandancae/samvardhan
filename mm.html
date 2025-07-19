@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material Mindfulness - SAMVARDHAN</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f4c3a 0%, #1a5f4a 25%, #2d7a5f 50%, #4a9d7f 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background Patterns */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .pattern-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pattern-circle:nth-child(1) { width: 100px; height: 100px; top: 20%; left: 10%; animation-delay: 0s; }
+        .pattern-circle:nth-child(2) { width: 150px; height: 150px; top: 60%; right: 15%; animation-delay: 2s; }
+        .pattern-circle:nth-child(3) { width: 80px; height: 80px; bottom: 30%; left: 20%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 76, 58, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 2rem 80px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #d4af37, #f4e08a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #d4af37;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Program Overview */
+        .program-overview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .overview-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #d4af37;
+        }
+
+        .overview-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .overview-image {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .overview-image i {
+            font-size: 6rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Activity Cards */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .activity-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d4af37, #f4e08a);
+        }
+
+        .activity-icon {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .activity-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-benefits {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .activity-benefits li {
+            padding: 0.3rem 0;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .activity-benefits li::before {
+            content: '✓';
+            color: #d4af37;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Implementation Guide */
+        .implementation-steps {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 5px solid #d4af37;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .step-number {
+            background: #d4af37;
+            color: #0f4c3a;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #d4af37;
+        }
+
+        .step-description {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Success Stories */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
+        .story-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .story-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #d4af37, #f4e08a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #0f4c3a;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: #d4af37;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #d4af37, #f4e08a);
+            color: #0f4c3a;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #d4af37;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #f4e08a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .program-overview {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section {
+                padding: 60px 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .activities-grid,
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-delay-1 { animation-delay: 0.2s; }
+        .animate-delay-2 { animation-delay: 0.4s; }
+        .animate-delay-3 { animation-delay: 0.6s; }
+        .animate-delay-4 { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-pattern">
+        <div class="pattern-circle"></div>
+        <div class="pattern-circle"></div>
+        <div class="pattern-circle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="logo">SAMVARDHAN</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../hubs/">Program Hubs</a></li>
+                <li><a href="../stories.html">Stories</a></li>
+                <li><a href="../register.html">Join Us</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <h1>Material Mindfulness</h1>
+            <p class="hero-subtitle">Transforming mining communities through conscious consumption, waste reduction, and sustainable material practices. Building awareness that every choice matters for our planet's future.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-card animate-delay-1">
+                    <span class="stat-number" id="communities-count">0</span>
+                    <span class="stat-label">Communities Engaged</span>
+                </div>
+                <div class="stat-card animate-delay-2">
+                    <span class="stat-number" id="waste-reduced">0</span>
+                    <span class="stat-label">Tons Waste Reduced</span>
+                </div>
+                <div class="stat-card animate-delay-3">
+                    <span class="stat-number" id="families-trained">0</span>
+                    <span class="stat-label">Families Trained</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Overview -->
+    <section class="section">
+        <div class="program-overview fade-in">
+            <div class="overview-text">
+                <h3>Mindful Living, Sustainable Future</h3>
+                <p>Material Mindfulness is our foundational program that awakens environmental consciousness in mining communities. We believe that transformation begins with awareness - understanding how our daily choices impact the environment.</p>
+                <p>Through workshops, community dialogues, and hands-on activities, we help families discover the power of conscious consumption, waste reduction, and sustainable living practices that protect both their health and the planet.</p>
+                <p>This program serves as the gateway to all other SAMVARDHAN initiatives, creating the mindset shift necessary for lasting environmental change.</p>
+            </div>
+            <div class="overview-image fade-in animate-delay-2">
+                <i class="fas fa-leaf"></i>
+                <h4 style="color: #d4af37; margin-top: 1rem;">Conscious Choices</h4>
+                <p style="opacity: 0.8; margin-top: 0.5rem;">Every decision shapes our environment</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Activities -->
+    <section class="section">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Core Activities</h2>
+            <p class="section-subtitle">Comprehensive programs designed to build environmental awareness and sustainable practices in mining communities</p>
+        </div>
+
+        <div class="activities-grid">
+            <div class="activity-card fade-in animate-delay-1">
+                <i class="activity-icon fas fa-brain"></i>
+                <h3 class="activity-title">Awareness Workshops</h3>
+                <p class="activity-description">Interactive sessions that connect daily choices to environmental impact, helping community members understand their role in planetary health.</p>
+                <ul class="activity-benefits">
+                    <li>Environmental impact education</li>
+                    <li>Personal responsibility awareness</li>
+                    <li>Community discussion forums</li>
+                    <li>Practical demonstration sessions</li>
+                </ul>
+            </div>
+
+            <div class="activity-card fade-in animate-delay-2">
+                <i class="activity-icon fas fa-recycle"></i>
+                <h3 class="activity-title">Waste Reduction Training</h3>
+                <p class="activity-description">Hands-on training in reducing, reusing, and recycling household waste, with focus on materials common in mining areas.</p>
+                <ul class="activity-benefits">
+                    <li>Waste segregation techniques</li>
+                    <li>Composting and organic waste management</li>
+                    <li>Creative reuse projects</li>
+                    <li>Community recycling systems</li>
+                </ul>
+            </div>
+
+            <div class="activity-card fade-in animate-delay-3">
+                <i class="activity-icon fas fa-shopping-cart"></i>
+                <h3 class="activity-title">Conscious Consumption</h3>
+                <p class="activity-description">Guidance on making mindful purchasing decisions that reduce environmental impact while supporting local economies.</p>
+                <ul class="activity-benefits">
+                    <li>Sustainable shopping practices</li>
+                    <li>Local product preference</li>
+                    <li>Package-free alternatives</li>
+                    <li>Quality over quantity mindset</li>
+                </ul>
+            </div>
+
+            <div class="activity-card fade-in animate-delay-4">
+                <i class="activity-icon fas fa-users"></i>
+                <h3 class="activity-title">Community Circles</h3>
+                <p class="activity-description">Regular gatherings where community members share experiences, challenges, and success stories in their sustainability journey.</p>
+                <ul class="activity-benefits">
+                    <li>Peer learning and support</li>
+                    <li>Experience sharing sessions</li>
+                    <li>Collaborative problem-solving</li>
+                    <li>Community commitment building</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Guide -->
+    <section class="section">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Implementation Journey</h2>
+            <p class="section-subtitle">A step-by-step approach to building material mindfulness in your community</p>
+        </div>
+
+        <div class="implementation-steps">
+            <div class="step-card fade-in animate-delay-1">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Community Assessment</h3>
+                <p class="step-description">We begin by understanding your community's current practices, challenges, and opportunities. This includes household surveys, waste audits, and stakeholder meetings to create a baseline understanding.</p>
+            </div>
+
+            <div class="step-card fade-in animate-delay-2">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Awareness Building</h3>
+                <p class="step-description">Through engaging workshops and community dialogues, we help residents understand the connection between their daily choices and environmental impact, creating motivation for change.</p>
+            </div>
+
+            <div class="step-card fade-in animate-delay-3">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Skill Development</h3>
+                <p class="step-description">Hands-on training sessions teach practical skills for waste reduction, conscious consumption, and sustainable living practices adapted to local contexts and resources.</p>
+            </div>
+
+            <div class="step-card fade-in animate-delay-4">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Community Integration</h3>
+                <p class="step-description">We establish regular community circles and peer support systems that sustain motivation and create accountability for continued environmental consciousness.</p>
+            </div>
+
+            <div class="step-card fade-in">
+                <div class="step-number">5</div>
+                <h3 class="step-title">Impact Measurement</h3>
+                <p class="step-description">Regular monitoring and evaluation help track progress, celebrate successes, and identify areas for improvement, ensuring continuous growth in environmental awareness.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="section">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Community Voices</h2>
+            <p class="section-subtitle">Real stories of transformation from mining communities embracing material mindfulness</p>
+        </div>
+
+        <div class="stories-grid">
+            <div class="story-card fade-in animate-delay-1">
+                <p class="story-quote">"Before SAMVARDHAN, we never thought about where our waste goes. Now my whole family thinks twice before buying anything. We've reduced our household waste by 70% and feel proud of our contribution to the environment."</p>
+                <div class="story-author">
+                    <div class="author-avatar">R</div>
+                    <div class="author-info">
+                        <h4>Rashida Khatun</h4>
+                        <p>Homemaker, Dhanbad</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-card fade-in animate-delay-2">
+                <p class="story-quote">"The awareness workshops opened our eyes. We started a community composting program and now our neighborhood is cleaner and greener. Our children are learning valuable lessons about caring for the Earth."</p>
+                <div class="story-author">
+                    <div class="author-avatar">S</div>
+                    <div class="author-info">
+                        <h4>Suresh Kumar</h4>
+                        <p>Community Leader, Jharia</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-card fade-in animate-delay-3">
+                <p class="story-quote">"Material Mindfulness changed how we run our household. We buy local, waste less, and save money while protecting the environment. It's amazing how small changes create big impacts."</p>
+                <div class="story-author">
+                    <div class="author-avatar">M</div>
+                    <div class="author-info">
+                        <h4>Meera Devi</h4>
+                        <p>SHG Member, Bokaro</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section">
+        <div class="action-buttons fade-in">
+            <a href="../register.html" class="btn">Join This Program</a>
+            <a href="#" class="btn btn-secondary" onclick="shareProgram()">Share with Community</a>
+            <a href="../contact.html" class="btn btn-secondary">Get Support</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" onclick="shareWhatsApp()"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2024 SAMVARDHAN. Transforming mining communities through environmental consciousness.</p>
+            <p>📱 <a href="tel:+918234567890" style="color: #d4af37;">+91 82345 67890</a> | 📧 <a href="mailto:info@samvardhan.org" style="color: #d4af37;">info@samvardhan.org</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Animated counters
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function updateCounter() {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            }
+            updateCounter();
+        }
+
+        // Initialize counters when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                animateCounter(document.getElementById('communities-count'), 45);
+                animateCounter(document.getElementById('waste-reduced'), 127);
+                animateCounter(document.getElementById('families-trained'), 850);
+            }, 500);
+        });
+
+        // WhatsApp sharing
+        function shareWhatsApp() {
+            const message = `🌱 Discover Material Mindfulness by SAMVARDHAN!\n\nLearn conscious consumption and waste reduction practices that transform mining communities.\n\nJoin us in building environmental awareness: ${window.location.href}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`);
+        }
+
+        // General sharing
+        function shareProgram() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Material Mindfulness - SAMVARDHAN',
+                    text: 'Join our environmental consciousness program for mining communities',
+                    url: window.location.href
+                });
+            } else {
+                shareWhatsApp();
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Dynamic navbar background
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(15, 76, 58, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(15, 76, 58, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
